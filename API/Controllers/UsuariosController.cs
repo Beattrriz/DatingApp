@@ -24,8 +24,8 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsuarios() //async operação assincrona
         {
             //O assincronismo é útil para melhorar a experiência do usuário quando há alguma operação que demanda muito tempo para ser executada. Então um cliente pode continuar disponível quando ele pede algo para um serviço que demora. Ele não é usado para tornar algo mais rápido
-            var users = await _context.Usuarios.ToListAsync(); // para usar de um jeito assincrono e não sincrono
-            return users;
+            var usuarios = await _context.Usuarios.ToListAsync(); // para usar de um jeito assincrono e não sincrono
+            return usuarios;
         }// ação de obter lista de usuarios sem especificar qual esta interessado
     [HttpGet("{id}")]
     public async Task<ActionResult<AppUser>> GetUsuarios(int id)
