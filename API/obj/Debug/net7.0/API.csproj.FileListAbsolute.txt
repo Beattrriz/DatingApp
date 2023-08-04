@@ -74,3 +74,4 @@ D:\Dotnet\AppDating\API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.D
 D:\Dotnet\AppDating\API\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\Dotnet\AppDating\API\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\Dotnet\AppDating\API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Dotnet\AppDating\API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

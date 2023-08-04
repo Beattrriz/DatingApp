@@ -4,15 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")] //acessar 
-    public class UsuariosController
-    : ControllerBase
+    [Authorize] //somente usuarios autorizados
+    public class UsuariosController: BaseApiController
     {
         private readonly DataContext _context;
 
@@ -20,6 +19,8 @@ namespace API.Controllers
         {
             _context = context;
         }
+
+    [AllowAnonymous] //permitir anonimato e os atributos autorizados são ignorados
     [HttpGet] //pega
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsuarios() //async operação assincrona
         {
@@ -27,6 +28,7 @@ namespace API.Controllers
             var usuarios = await _context.Usuarios.ToListAsync(); // para usar de um jeito assincrono e não sincrono
             return usuarios;
         }// ação de obter lista de usuarios sem especificar qual esta interessado
+     
     [HttpGet("{id}")]
     public async Task<ActionResult<AppUser>> GetUsuarios(int id)
     {
@@ -36,3 +38,5 @@ namespace API.Controllers
     }
 
 }
+
+   
