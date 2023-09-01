@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dotnet\\AppDating\\API\\API.csproj": {}
+    "d:\\Dotnet\\AppDating\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\Dotnet\\AppDating\\API\\API.csproj": {
+    "d:\\Dotnet\\AppDating\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dotnet\\AppDating\\API\\API.csproj",
+        "projectUniqueName": "d:\\Dotnet\\AppDating\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Dotnet\\AppDating\\API\\API.csproj",
+        "projectPath": "d:\\Dotnet\\AppDating\\API\\API.csproj",
         "packagesPath": "C:\\Users\\bya_2\\.nuget\\packages\\",
-        "outputPath": "D:\\Dotnet\\AppDating\\API\\obj\\",
+        "outputPath": "d:\\Dotnet\\AppDating\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
