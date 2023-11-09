@@ -6,18 +6,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
+import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent
+    NavComponent,
+    HomeComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     //requisição http HttpClientModule requisição de formulario FormsModule
-    FormsModule //usar os formulários
+    FormsModule,
+    //dropdownlist do ngx bootstrap
+    BsDropdownModule.forRoot(),
+    BrowserAnimationsModule //usar os formulários
   ],
   providers: [],
   bootstrap: [AppComponent]
