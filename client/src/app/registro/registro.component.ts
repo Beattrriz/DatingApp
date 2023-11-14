@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registro',
@@ -10,7 +11,7 @@ export class RegistroComponent{
   @Output() cancelarRegistro = new EventEmitter(); //emite um evento dentro do registro component
   model: any = {}
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private toastr: ToastrService) {}
 
   NgOnInit(): void{
   }
@@ -20,7 +21,10 @@ export class RegistroComponent{
       next: () => {
         this.cancelar(); //apos registrar volta a pagina home
       },
-      error: error => console.log(error)
+      error: error => {
+        this.toastr.error(error);
+        console.log(error);
+      }
     })
   }
   //emite o que estamos produzindo a partir do compoenet filho

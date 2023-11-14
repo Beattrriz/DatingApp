@@ -1,23 +1,22 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Dating App</a>
+      <a class="navbar-brand" routerLink="/">Dating App</a>
 
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
-          <li class="nav-item">
-            <a class="nav-link active"  href="#">Matches</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Listas</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-disabled="true">Mensagens</a>
-          </li>
-          <li class="nav-item" (click)="logout()">
-            <a class="nav-link" aria-disabled="true">Sair</a>
-          </li>
+        <ul class="navbar-nav me-auto mb-2 mb-md-0"> <!--*ngIf="accountService.currentUser$ | async" para conectar o usuario-->
+          <ng-container *ngIf="accountService.currentUser$ | async"> <!--oculta os links se o usuario não for autenticado-->
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/membros" routerLinkActive="active">Matches</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/listas" routerLinkActive="active">Listas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/mensagens" routerLinkActive="active">Mensagens</a> <!--routerLinkActive="active" o link fica ativado quando o usuario clica-->
+            </li>
+          </ng-container>
         </ul>
-        <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
-          <a class="dropdown-toggle text-light" dropdownToggle>Bem Vindo!</a>
+        <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as usuario" dropdown>
+          <a class="dropdown-toggle text-light" dropdownToggle>Bem-Vindo {{usuario.nomeUsuario | titlecase}}</a>
           <div class="dropdown-menu" *dropdownMenu>
             <a class="dropdown-item">Editar Perfil</a>
             <a class="dropdown-item" (click)="logout()">Sair</a>
@@ -36,7 +35,7 @@
           class="form-control me-2" 
           type="password" 
           placeholder="Senha">
-          <button class="btn btn-outline-success" type="submit">Login</button>
+          <button class="btn btn-success" type="submit">Login</button>
         </form>
       </div>
   </nav>
