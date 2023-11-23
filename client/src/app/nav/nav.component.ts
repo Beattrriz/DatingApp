@@ -21,8 +21,7 @@ export class NavComponent implements OnInit {
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: _ => this.router.navigateByUrl('/membros'), //underline significa que nao estmos usando argumento para o metodo
-      error: error => this.toastr.error(error.error)// ngx-toastr
+      next: _ => this.router.navigateByUrl('/membros') //underline significa que nao estmos usando argumento para o metodo
     })
   }
 

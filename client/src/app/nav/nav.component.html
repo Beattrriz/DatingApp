@@ -14,6 +14,9 @@
               <a class="nav-link" routerLink="/mensagens" routerLinkActive="active">Mensagens</a> <!--routerLinkActive="active" o link fica ativado quando o usuario clica-->
             </li>
           </ng-container>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/errors" routerLinkActive="active">Erros</a> <!--routerLinkActive="active" o link fica ativado quando o usuario clica-->
+          </li>
         </ul>
         <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as usuario" dropdown>
           <a class="dropdown-toggle text-light" dropdownToggle>Bem-Vindo {{usuario.nomeUsuario | titlecase}}</a>

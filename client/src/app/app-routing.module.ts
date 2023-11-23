@@ -6,6 +6,9 @@ import { DetalhesMembrosComponent } from './membros/detalhes-membros/detalhes-me
 import { ListasComponent } from './listas/listas.component';
 import { MensagensComponent } from './mensagens/mensagens.component';
 import { autenticacaoGuard } from './_guards/autenticacao.guard';
+import { TestErroComponent } from './erros/test-erro/test-erro.component';
+import { NotFoundComponent } from './erros/not-found/not-found.component';
+import { ServerErrorComponent } from './erros/server-error/server-error.component';
 
 const routes: Routes = [
   //cada raiz é um objeto
@@ -22,7 +25,10 @@ const routes: Routes = [
       { path: 'mensagens', component: MensagensComponent },
     ]
   },
-  { path: '**', component: HomeComponent, pathMatch: 'full' }, //qualquer coisa que não esteja nesta lista
+  { path: 'errors', component: TestErroComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  {path: 'server-error', component: ServerErrorComponent},
+  { path: '**', component: NotFoundComponent, pathMatch: 'full' }, //qualquer coisa que não esteja nesta lista
 ];
 
 @NgModule({

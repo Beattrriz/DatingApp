@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; //quando adiciona o import la em baixo tem q por aqui em cima
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'; //quando adiciona o import la em baixo tem q por aqui em cima
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,10 @@ import { DetalhesMembrosComponent } from './membros/detalhes-membros/detalhes-me
 import { ListasComponent } from './listas/listas.component';
 import { MensagensComponent } from './mensagens/mensagens.component';
 import { SharedModule } from './_modules/shared.module';
+import { TestErroComponent } from './erros/test-erro/test-erro.component';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { NotFoundComponent } from './erros/not-found/not-found.component';
+import { ServerErrorComponent } from './erros/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,10 @@ import { SharedModule } from './_modules/shared.module';
     ListaMembrosComponent,
     DetalhesMembrosComponent,
     ListasComponent,
-    MensagensComponent
+    MensagensComponent,
+    TestErroComponent,
+    NotFoundComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,10 @@ import { SharedModule } from './_modules/shared.module';
     BrowserAnimationsModule, //usar os formulários
     SharedModule //importações por exemplo de tema
   ],
-  providers: [],
+  providers: [
+    //tem que passar o interceptor que criamos ng g inteceptor _interceptor/error
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

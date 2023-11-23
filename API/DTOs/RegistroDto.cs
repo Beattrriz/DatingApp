@@ -13,6 +13,7 @@ namespace API.DTOs
         public string NomeUsuario { get; set; }
 
         [Required]
+        [StringLength(8, MinimumLength = 4)] //max e min do tamanho da senha
         public string Senha { get; set; }
     }
 }
