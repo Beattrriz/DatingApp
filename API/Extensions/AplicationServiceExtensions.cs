@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Data;
 using API.Interfaces;
 using API.Services;
@@ -15,11 +11,13 @@ namespace API.Extensions
         {
             // Add services to the container.
             services.AddDbContext<DataContext>(options =>
-             options.UseSqlServer(config.GetConnectionString("ConexaoPadrao")));
+              options.UseSqlServer(config.GetConnectionString("ConexaoPadrao"), x => x.UseDateOnlyTimeOnly()));
             //adiciona para configura a requisição do angular a api
 
             services.AddCors();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //mapeamento
 
             return services;
         }

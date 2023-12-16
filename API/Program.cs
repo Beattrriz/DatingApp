@@ -33,4 +33,17 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using var scope = app.Services.CreateScope(); //tem que colocar exatamente aqui
+var services = scope.ServiceProvider;
+try{
+    var context = services.GetRequiredService<DataContext>(); //acessa o banco para criar migrations
+    await context.Database.MigrateAsync();
+    await DadosIniciais.DadosIniciaisUsuario(context);
+}
+catch(Exception ex)
+{
+    var logger = services.GetService<ILogger<Program>>();
+    logger.LogError(ex, "Ocorreu um erro durante a migração");
+}
+
 app.Run();

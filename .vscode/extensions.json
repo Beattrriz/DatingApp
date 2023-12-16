@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "patcx.vscode-nuget-gallery"
+        "patcx.vscode-nuget-gallery",
+        "aliasadidev.nugetpackagemanagergui"
     ]
 }
