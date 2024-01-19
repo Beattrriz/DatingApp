@@ -1,1 +1,5 @@
-<p>lista-membros works!</p>
+<div class="row">
+    <div class="col-2" *ngFor="let membro of membros">
+        <app-card-membro [membro]="membro"></app-card-membro>
+    </div>
+</div>

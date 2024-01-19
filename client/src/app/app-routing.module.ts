@@ -20,7 +20,7 @@ const routes: Routes = [
     children: [ //verifica se o usuario pode acessar essa rota
       {
         path: 'membros', component: ListaMembrosComponent}, 
-      { path: 'membros/:id', component: DetalhesMembrosComponent },
+      { path: 'membros/:nome', component: DetalhesMembrosComponent },
       { path: 'listas', component: ListasComponent },
       { path: 'mensagens', component: MensagensComponent },
     ]

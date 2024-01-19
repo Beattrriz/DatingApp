@@ -1,1 +1,52 @@
-<p>detalhes-membros works!</p>
+<div class="row" *ngIf="membro">
+    <div class="col-4">
+        <div class="card">
+            <img src="{{membro.fotoUrl || '.assets/usuario.png'}}" alt="{{membro.conhecidoComo}}"
+            class="card-img-top img-thumbnail">
+            <div class="card-body">
+               <div>
+                  <strong>Localização:</strong>
+                  <p>{{membro.cidade}}, {{membro.pais}}</p>
+               </div>
+               <div>
+                  <strong>Idade:</strong>
+                  <p>{{membro.idade}}</p>
+               </div>
+               <div>
+                  <strong>Última vez Ativo:</strong>
+                  <p>{{membro.ultimaVezAtivo}}</p>
+               </div>
+               <div>
+                  <strong>Membro desde:</strong>
+                  <p>{{membro.criado}}</p>
+               </div>
+            </div>  
+            <div class="card-footer">
+               <div class="btn-group d-flex">
+                   <button class="btn btn-primary">Like</button>
+                   <button class="btn btn-success">Mensagens</button>
+               </div> <!--fila-->
+            </div>   
+       </div> <!--o bootstrap divide em 12 colunas-->  
+    </div>
+    <div class="col-8">
+      <tabset class="member-tabset">
+         <tab heading="About {{membro.conhecidoComo}}">
+         <h4>Descrição</h4>
+         <p>{{membro.introducao}}</p>
+         <h4>Procurando por</h4>
+         <p>{{membro.procurandoPor}}</p>
+      </tab>
+      <tab heading="Interesses">
+         <h4>Interesses</h4>
+         <p>{{membro.interesses}}</p>
+      </tab>
+      <tab heading="Fotos" #photoTab="tab"> <!--deixou a foto no centro-->
+         <gallery *ngIf="photoTab.active" [items]="imagens" class="gallery"></gallery>>
+      </tab>
+      <tab heading="Mensagens">
+         <p>As Mensagens aparecerão aqui</p>
+      </tab>
+      </tabset>
+    </div>      
+</div>

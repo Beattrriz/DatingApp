@@ -1,7 +1,7 @@
 [
     {
         "Nome": "Lisa",
-        "Genero": "female",
+        "Genero": "Feminino",
         "DataNascimento": "1956-07-22",
         "ConhecidoComo": "Lisa",
         "Criado": "2020-06-24",
@@ -14,13 +14,13 @@
         "Fotos": [
             {
                 "Url": "https://randomuser.me/api/portraits/women/54.jpg",
-                "IsMain": true
+                "Principal": true
             }
         ]
     },
     {
         "Nome": "Karen",
-        "Genero": "female",
+        "Genero": "Feminino",
         "DataNascimento": "1995-10-12",
         "ConhecidoComo": "Karen",
         "Criado": "2019-12-09",
@@ -33,13 +33,13 @@
         "Fotos": [
             {
                 "Url": "https://randomuser.me/api/portraits/women/50.jpg",
-                "IsMain": true
+                "Principal": true
             }
         ]
     },
     {
         "Nome": "Margo",
-        "Genero": "female",
+        "Genero": "Feminino",
         "DataNascimento": "1959-01-24",
         "ConhecidoComo": "Margo",
         "Criado": "2019-08-10",
@@ -52,13 +52,13 @@
         "Fotos": [
             {
                 "Url": "https://randomuser.me/api/portraits/women/14.jpg",
-                "IsMain": true
+                "Principal": true
             }
         ]
     },
     {
         "Nome": "Lois",
-        "Genero": "female",
+        "Genero": "Feminino",
         "DataNascimento": "1988-06-22",
         "ConhecidoComo": "Lois",
         "Criado": "2019-04-24",
@@ -71,13 +71,13 @@
         "Fotos": [
             {
                 "Url": "https://randomuser.me/api/portraits/women/11.jpg",
-                "IsMain": true
+                "Principal": true
             }
         ]
     },
     {
         "Nome": "Ruthie",
-        "Genero": "female",
+        "Genero": "Feminino",
         "DataNascimento": "1956-01-12",
         "ConhecidoComo": "Ruthie",
         "Criado": "2019-04-30",
@@ -90,13 +90,13 @@
         "Fotos": [
             {
                 "Url": "https://randomuser.me/api/portraits/women/84.jpg",
-                "IsMain": true
+                "Principal": true
             }
         ]
     },
     {
         "Nome": "Todd",
-        "Genero": "male",
+        "Genero": "Masculino",
         "DataNascimento": "1950-02-07",
         "ConhecidoComo": "Todd",
         "Criado": "2019-04-29",
@@ -104,18 +104,18 @@
         "Introducao": "Mollit elit cillum dolore ea laboris consequat excepteur eiusmod eiusmod qui magna mollit occaecat. Sint qui ut veniam non. Est non veniam magna in consectetur ullamco eiusmod in elit aute ea ipsum aliquip. Duis nisi do dolore ad. Consectetur incididunt quis exercitation aliquip officia. Ex anim pariatur veniam fugiat aute consequat quis nisi in quis.\r\n",
         "ProcurandoPor": "Magna ex non ullamco ipsum commodo minim cupidatat sit. Sint dolor enim amet cupidatat. Anim et ea officia ea officia veniam adipisicing tempor. Labore consequat in duis deserunt tempor aliqua. Eu incididunt id deserunt proident ullamco aliqua culpa officia anim deserunt fugiat amet voluptate qui. In id non sint sint aliqua commodo reprehenderit excepteur cillum Lorem minim.\r\n",
         "Interesses": "Esse cillum deserunt fugiat deserunt irure ea esse deserunt quis exercitation velit do nisi reprehenderit.",
-        "Cidade": "Maranhão",
-        "Pais": "Brasil",
+        "Cidade": "Xangai",
+        "Pais": "China",
         "Fotos": [
             {
                 "Url": "https://randomuser.me/api/portraits/men/90.jpg",
-                "IsMain": true
+                "Principal": true
             }
         ]
     },
     {
         "Nome": "Porter",
-        "Genero": "male",
+        "Genero": "Masculino",
         "DataNascimento": "1967-04-09",
         "ConhecidoComo": "Porter",
         "Criado": "2020-04-05",
@@ -128,13 +128,13 @@
         "Fotos": [
             {
                 "Url": "https://randomuser.me/api/portraits/men/87.jpg",
-                "IsMain": true
+                "Principal": true
             }
         ]
     },
     {
         "Nome": "Mayo",
-        "Genero": "male",
+        "Genero": "Masculino",
         "DataNascimento": "1990-03-23",
         "ConhecidoComo": "Mayo",
         "Criado": "2020-03-14",
@@ -147,13 +147,13 @@
         "Fotos": [
             {
                 "Url": "https://randomuser.me/api/portraits/men/57.jpg",
-                "IsMain": true
+                "Principal": true
             }
         ]
     },
     {
         "Nome": "Skinner",
-        "Genero": "male",
+        "Genero": "Masculino",
         "DataNascimento": "1952-12-01",
         "ConhecidoComo": "Skinner",
         "Criado": "2019-01-28",
@@ -166,13 +166,13 @@
         "Fotos": [
             {
                 "Url": "https://randomuser.me/api/portraits/men/11.jpg",
-                "IsMain": true
+                "Principal": true
             }
         ]
     },
     {
         "Nome": "Davis",
-        "Genero": "male",
+        "Genero": "Masculino",
         "DataNascimento": "1978-03-20",
         "ConhecidoComo": "Davis",
         "Criado": "2020-02-25",
@@ -185,7 +185,7 @@
         "Fotos": [
             {
                 "Url": "https://randomuser.me/api/portraits/men/93.jpg",
-                "IsMain": true
+                "Principal": true
             }
         ]
     }
