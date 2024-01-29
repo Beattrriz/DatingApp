@@ -1,0 +1,67 @@
+<div class="row" *ngIf="membro">
+    <div class="col-4">
+        <h1>Seu Perfil</h1>
+    </div>
+    <div class="col-8">
+        <div class="alert alert-info pb-0" *ngIf="editForm.dirty"> <!--retira a iformação quando o form foi salvo-->
+            <p><strong>Informação: </strong> Você fez alterações. Quaisquer alterações não salvas serão perdidas</p>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <img src="{{membro.fotoUrl || '.assets/usuario.png'}}" alt="{{membro.conhecidoComo}}"
+            class="card-img-top img-thumbnail">
+            <div class="card-body">
+               <div>
+                  <strong>Localização:</strong>
+                  <p>{{membro.cidade}}, {{membro.pais}}</p>
+               </div>
+               <div>
+                  <strong>Idade:</strong>
+                  <p>{{membro.idade}}</p>
+               </div>
+               <div>
+                  <strong>Última vez Ativo:</strong>
+                  <p>{{membro.ultimaVezAtivo}}</p>
+               </div>
+               <div>
+                  <strong>Membro desde:</strong>
+                  <p>{{membro.criado}}</p>
+               </div>
+            </div>  
+            <div class="card-footer">
+                <button type="submit" [disabled]="!editForm.dirty" form="editForm" class="btn btn-success col-12">Salvar Alterações</button>
+            </div>   
+       </div> <!--o bootstrap divide em 12 colunas-->  
+    </div>
+    <div class="col-8">
+      <tabset class="member-tabset">
+         <tab heading="About {{membro.conhecidoComo}}">
+            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMembro()">
+                <h4 class="mt-2">Descrição</h4>
+                <textarea class="form-control" [(ngModel)]="membro.introducao" 
+                name="introducao"
+                rows="6"></textarea>
+                <h4 class="mt-2">Procurando Por</h4>
+                <textarea class="form-control" [(ngModel)]="membro.procurandoPor" 
+                name="procurandoPor"
+                rows="6"></textarea>
+                <h4 class="mt-2">Interesses</h4>
+                <textarea class="form-control" [(ngModel)]="membro.interesses" 
+                name="interesses"
+                rows="6"></textarea>
+                <h4 class="mt-2">Detalhes de Localização:</h4>
+                <div class="d-flex d-flex-row aling-items-center">
+                    <label for="cidade">Cidade: </label>
+                    <input type="text" [(ngModel)]="membro.cidade" name="cidade" class="form-control mx-2">
+                    <label for="Pais">País: </label>
+                    <input type="text" [(ngModel)]="membro.pais" name="pais" class="form-control mx-2">
+                </div>
+            </form>
+      </tab>
+      <tab heading="Editar Fotos">
+         <p>Edite suas fotos aqui</p>
+      </tab>
+      </tabset>
+    </div>      
+</div>

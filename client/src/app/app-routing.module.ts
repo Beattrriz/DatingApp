@@ -9,6 +9,8 @@ import { autenticacaoGuard } from './_guards/autenticacao.guard';
 import { TestErroComponent } from './erros/test-erro/test-erro.component';
 import { NotFoundComponent } from './erros/not-found/not-found.component';
 import { ServerErrorComponent } from './erros/server-error/server-error.component';
+import { EditarMembroComponent } from './membros/editar-membro/editar-membro.component';
+import { evitarAlteracoesNaoSalvasGuard } from './_guards/evitar-alteracoes-nao-salvas.guard';
 
 const routes: Routes = [
   //cada raiz é um objeto
@@ -21,6 +23,7 @@ const routes: Routes = [
       {
         path: 'membros', component: ListaMembrosComponent}, 
       { path: 'membros/:nome', component: DetalhesMembrosComponent },
+      { path: 'membro/editar', component: EditarMembroComponent, canDeactivate: [evitarAlteracoesNaoSalvasGuard] },
       { path: 'listas', component: ListasComponent },
       { path: 'mensagens', component: MensagensComponent },
     ]
