@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+//aqui criamos o http para realizar as tareafs (enviar para o banco, add, deletar) do lado do front
+//apos aqui deve ir para membro.service e inserir o caimnho
+//após ir no componento .ts para criar a função que ira realizar o metodo e configurar o html
 namespace API.Controllers
 {
     [Authorize] //somente usuarios autorizados
@@ -19,9 +24,11 @@ namespace API.Controllers
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IMapper _mapper;
-
-        public UsuariosController(IUsuarioRepository usuarioRepository, IMapper mapper) //construtor para criara instancia do banco
+        public readonly IFotoService _fotoService;
+        public UsuariosController(IUsuarioRepository usuarioRepository, IMapper mapper,
+         IFotoService fotoService) //construtor para criara instancia do banco
         {
+            _fotoService = fotoService;
             _mapper = mapper;
             _usuarioRepository = usuarioRepository;
 
@@ -38,7 +45,7 @@ namespace API.Controllers
         }// ação de obter lista de usuarios sem especificar qual esta interessado
      
     [HttpGet("{nome}")]
-    public async Task<ActionResult<MembroDto>> GetUsuarios(string nome)
+    public async Task<ActionResult<MembroDto>> GetUsuario(string nome)
     {
           return await _usuarioRepository.GetMemberAsync(nome); //procura pelo nome de usuario
             
@@ -47,8 +54,8 @@ namespace API.Controllers
     [HttpPut]
     public async Task<ActionResult> UpdateUsuario(MembroUpdateDto membroUpdateDto)
     {
-           var nome = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // esse tem que ser User mesmo vem do sistema
-            var user = await _usuarioRepository.GetUserByUsernameAsync(nome);
+ // esse tem que ser User mesmo vem do sistema
+            var user = await _usuarioRepository.GetUserByUsernameAsync(User.GetNomeUsuario());
 
             if (user == null) return NotFound();
 
@@ -58,6 +65,84 @@ namespace API.Controllers
 
             return BadRequest("Não foi possível atualizar o usuário");
     }
+
+    [HttpPost("add-foto")]
+
+    public async Task<ActionResult<FotoDto>> AddFoto(IFormFile file)
+    {
+            var usuario = await _usuarioRepository.GetUserByUsernameAsync(User.GetNomeUsuario());
+
+            if (usuario == null) return NotFound();
+
+            var resultado = await _fotoService.AddPhotoAsync(file);
+
+            if (resultado.Error != null) return BadRequest(resultado.Error.Message); //resultado
+
+            //se não der nenhum erro
+            var foto = new Foto
+            {
+                Url = resultado.SecureUrl.AbsoluteUri,
+                IdPublico = resultado.PublicId
+            };
+
+            if (usuario.Fotos.Count == 0) foto.Principal = true;
+
+            usuario.Fotos.Add(foto);
+
+            if (await _usuarioRepository.SaveAllAsync()) //return _mapper.Map<FotoDto>(foto);
+            {
+                return CreatedAtAction(nameof(GetUsuario), 
+                new { nome = usuario.Nome }, _mapper.Map<FotoDto>(foto));
+            }
+            return BadRequest("O sistema obteve problemas em adicionar a foto");
+    }
+
+    [HttpPut("definir-foto-principal/{IdFoto}")]
+    public async Task<ActionResult> DefinirFotoPrincipal(int idFoto)
+    {
+            var usuario = await _usuarioRepository.GetUserByUsernameAsync(User.GetNomeUsuario());
+
+            if (usuario == null) return NotFound();
+
+            var foto = usuario.Fotos.FirstOrDefault(x => x.Id == idFoto);
+
+            if (foto == null) return NotFound();
+
+            if (foto.Principal) return BadRequest("Esta já é sua foto principal");
+
+            var fotoAtual = usuario.Fotos.FirstOrDefault(x => x.Principal);
+            if (fotoAtual != null) fotoAtual.Principal = false;
+            foto.Principal = true;
+
+            if (await _usuarioRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Problema ao configurar a foto principal");
+    }
+
+    [HttpDelete("deletar-foto/{IdFoto}")]
+    public async Task<ActionResult> DeletarFoto(int idFoto){
+
+            var usuario = await _usuarioRepository.GetUserByUsernameAsync(User.GetNomeUsuario());
+
+            var foto = usuario.Fotos.FirstOrDefault(x => x.Id == idFoto); //acessa as fotos
+
+            if (foto == null) return NotFound();
+
+            if (foto.Principal) return BadRequest("Você não pode apagar sua foto principal");//nao pode apagar a foto principal
+
+            if(foto.IdPublico != null)
+            {
+                var result = await _fotoService.DeletePhotoAsync(foto.IdPublico);
+                if (result.Error != null) return BadRequest(result.Error.Message);
+            }//se a foto tem identificação publica
+
+            usuario.Fotos.Remove(foto);
+
+            if (await _usuarioRepository.SaveAllAsync()) return Ok();
+
+            return BadRequest("Houve problemas em deletar a foto");
+    }
+
 
     }   
 

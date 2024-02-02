@@ -43,7 +43,7 @@ namespace API.Controllers
             return new UsuarioDto
             {
                 NomeUsuario = usuario.Nome,
-                Token = _tokenService.CreateToken(usuario)
+                Token = _tokenService.CreateToken(usuario)          
             };
         }
 
@@ -51,7 +51,9 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UsuarioDto>> Login(LoginDto loginDto)
         {
-            var usuario = await _context.Usuarios.SingleOrDefaultAsync(x => x.Nome == loginDto.NomeUsuario);
+            var usuario = await _context.Usuarios
+            .Include(f => f.Fotos)
+            .SingleOrDefaultAsync(x => x.Nome == loginDto.NomeUsuario);
             
             if(usuario == null) return Unauthorized("Nome de Usuário inválido");
 
@@ -67,7 +69,9 @@ namespace API.Controllers
             return new UsuarioDto
             {
                 NomeUsuario = usuario.Nome,
-                Token = _tokenService.CreateToken(usuario)
+                Token = _tokenService.CreateToken(usuario),
+                FotoUrl = usuario.Fotos.FirstOrDefault(x => x.Principal)?.Url //a foto naõ aparece pq estava vazia, naõ tem foto para verificar
+                //vai alterar o httpost login
             };
         }
         //verifica se existe o usuario

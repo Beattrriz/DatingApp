@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "CloudinaryDotNet": {
+              "target": "Package",
+              "version": "[1.25.0, )"
+            },
             "ErikEJ.EntityFrameworkCore.SqlServer.DateOnlyTimeOnly": {
               "target": "Package",
               "version": "[7.0.6, )"
