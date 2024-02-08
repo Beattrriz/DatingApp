@@ -5,7 +5,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'; //qu
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { RegistroComponent } from './registro/registro.component';
@@ -23,6 +23,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { EditarMembroComponent } from './membros/editar-membro/editar-membro.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { FotoEditorComponent } from './membros/foto-editor/foto-editor.component';
+import { MensagensFormComponent } from './_forms/mensagens-form/mensagens-form.component';
+import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
 
 @NgModule({
   declarations: [
@@ -38,14 +40,17 @@ import { FotoEditorComponent } from './membros/foto-editor/foto-editor.component
     ServerErrorComponent,
     CardMembroComponent,
     EditarMembroComponent,
-    FotoEditorComponent
+    FotoEditorComponent,
+    MensagensFormComponent,
+    DatePickerComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule, //rotas
     HttpClientModule,
     //requisição http HttpClientModule requisição de formulario FormsModule
     FormsModule,
+    ReactiveFormsModule, //form reativo
     BrowserAnimationsModule, //usar os formulários
     SharedModule //importações por exemplo de tema
   ],

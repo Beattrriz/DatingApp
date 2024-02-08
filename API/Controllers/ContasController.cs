@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using API.DTOs;
 using API.Interfaces;
 using API.Services;
+using AutoMapper;
 
 namespace API.Controllers
 {
@@ -14,36 +15,39 @@ namespace API.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
+        public readonly IMapper _mapper;
 
-        public ContasController(DataContext context, ITokenService tokenService)
+        public ContasController(DataContext context, ITokenService tokenService, IMapper mapper)
         {
+            _mapper = mapper;
             _tokenService = tokenService;
             _context = context;
 
 
         }
 
-        [HttpPost("registro")] //api/contas/registro?nomerusuario=dave&senha=pwd
+        [HttpPost("registro")] //api/contas/registro?nomerusuario=dave&senha=pwd  vai mapear com Imapper agora
         public async Task<ActionResult<UsuarioDto>> Registro(RegistroDto registroDto)
         {
             if(await ExisteUsuario(registroDto.NomeUsuario)) return BadRequest("Nome de Usuário em uso");
+
+            var usuario = _mapper.Map<AppUser>(registroDto);
             
             using var hmac = new HMACSHA512(); //USING DESCARTA vai descartar o hashin
-            
-            var usuario = new AppUser //cria um novo usuario
-            {
-                Nome = registroDto.NomeUsuario.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registroDto.Senha)), //calcula o algoritmo de hash
-                PasswordSalt = hmac.Key //cgave gerada aleatoria
-            };
 
-            _context.Usuarios.Add(usuario);
+
+            usuario.Nome = registroDto.NomeUsuario.ToLower();
+            usuario.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registroDto.Senha)); //calcula o algoritmo de hash
+            usuario.PasswordSalt = hmac.Key; //cgave gerada aleatoria
+
+            _context.Usuarios.Add(usuario); //adiciona novo usuario
             await _context.SaveChangesAsync();
 
             return new UsuarioDto
             {
                 NomeUsuario = usuario.Nome,
-                Token = _tokenService.CreateToken(usuario)          
+                Token = _tokenService.CreateToken(usuario),
+                ConhecidoComo =  usuario.ConhecidoComo   
             };
         }
 
@@ -70,8 +74,9 @@ namespace API.Controllers
             {
                 NomeUsuario = usuario.Nome,
                 Token = _tokenService.CreateToken(usuario),
-                FotoUrl = usuario.Fotos.FirstOrDefault(x => x.Principal)?.Url //a foto naõ aparece pq estava vazia, naõ tem foto para verificar
+                FotoUrl = usuario.Fotos.FirstOrDefault(x => x.Principal)?.Url, //a foto naõ aparece pq estava vazia, naõ tem foto para verificar
                 //vai alterar o httpost login
+                ConhecidoComo =  usuario.ConhecidoComo 
             };
         }
         //verifica se existe o usuario

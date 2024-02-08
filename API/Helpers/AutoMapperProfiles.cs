@@ -14,6 +14,7 @@ namespace API.Helpers
             .ForMember(dest => dest.Idade, opt => opt.MapFrom(src => src.DataNascimento.CalcularIdade()));
             CreateMap<Foto, FotoDto>(); //onde queremos mapear
             CreateMap<MembroUpdateDto, AppUser>(); //mandar as alterações para o banco
+            CreateMap<RegistroDto, AppUser>();//registro de novos usuarios
         }
     }
 }
