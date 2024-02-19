@@ -82,6 +82,11 @@ export class FotoEditorComponent implements OnInit{
       if (resposta) {
         const foto = JSON.parse(resposta);
         this.membro?.fotos.push(foto);
+        if (foto.principal && this.usuario && this.membro) { //atualiza a foto de perfil e da bolinha quando termina de carregar a imagm
+          this.usuario.fotoUrl = foto.url;
+          this.membro.fotoUrl = foto.url;
+          this.accountService.setCurrentUser(this.usuario);
+        }
       }
     } //sucesso>
   }

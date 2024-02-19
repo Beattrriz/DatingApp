@@ -63,13 +63,23 @@ export class RegistroComponent{
     this.cancelarRegistro.emit(false);
   }
 
-  private getDateOnly(dataNas: string | undefined){
+  /*private getDateOnly(dataNas: string | undefined){ não funcionou para a data formatada pt-br
     if (!dataNas) return; //verifica se a data de nascimento esta vazia
     let data = new Date(dataNas);
-    new Date(data.setMinutes(data.getMinutes() - data.getTimezoneOffset())).toString().slice(0, 10) //obtem os caracteres de 0 a 10
-    const dataFormatada = data.toLocaleDateString('pt-BR'); 
-    return dataFormatada;
-  }
+     return new Date(data.setMinutes(data.getMinutes() - data.getTimezoneOffset())).toString().slice(0, 10) //obtem os caracteres de 0 a 10
+    //const dataFormatada = data.toLocaleDateString('pt-BR'); 
+    //return dataFormatada;
+  }*/
+
+  private getDateOnly(dataNas: string | undefined): string | undefined {
+    if (!dataNas) return undefined; // Verifica se a data de nascimento está vazia
+    const data = new Date(dataNas);
+    // Extrai o ano, mês e dia e formata a data no formato "yyyy-MM-dd"
+    const ano = data.getFullYear();
+    const mes = ('0' + (data.getMonth() + 1)).slice(-2); // Adiciona um zero à esquerda se o mês for menor que 10
+    const dia = ('0' + data.getDate()).slice(-2); // Adiciona um zero à esquerda se o dia for menor que 10
+    return `${ano}-${mes}-${dia}`;
+}
   
   
 }
