@@ -1,5 +1,6 @@
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -25,11 +26,28 @@ namespace API.Data
             .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<MembroDto>> GetMembersAsync()
+        public async Task<PaginaLista<MembroDto>> GetMembersAsync(UsuarioParametro usuarioParametro) //metodo que vai retornar os parametros para paginacao
         {
-            return await _context.Usuarios
-            .ProjectTo<MembroDto>(_mapper.ConfigurationProvider)
-            .ToListAsync();
+            var query = _context.Usuarios.AsQueryable();
+
+            query = query.Where(u => u.Nome != usuarioParametro.UsuarioAtual);
+            query = query.Where(u => u.Genero == usuarioParametro.Genero);//vai retonar o genero oposto
+
+            var minIdade = DateOnly.FromDateTime(DateTime.Today.AddYears(-usuarioParametro.MaxIdade - 1)); //usuario filtrar por idade
+            var maxIdade = DateOnly.FromDateTime(DateTime.Today.AddYears(-usuarioParametro.MinIdade));
+
+            query = query.Where(u => u.DataNascimento >= minIdade && u.DataNascimento <= maxIdade);
+
+            query = usuarioParametro.OrderBy switch
+            {
+                "criado" => query.OrderByDescending(u => u.Criado),
+                _ => query.OrderByDescending(u => u.UltimaVezAtivo)
+            };
+
+            return await PaginaLista<MembroDto>.CreateAsync(
+                query.AsNoTracking().ProjectTo<MembroDto>(_mapper.ConfigurationProvider), 
+                usuarioParametro.NumeroPagina, 
+                usuarioParametro.TamanhoPagina);
         }
 
         public async Task<IEnumerable<AppUser>> GetUserAsync()

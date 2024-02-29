@@ -14,5 +14,7 @@ namespace API.DTOs
         public string FotoUrl { get; set; }
 
         public string ConhecidoComo { get; set; }
+
+        public string Genero { get; set; }
     }
 }

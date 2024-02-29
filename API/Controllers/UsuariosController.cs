@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 //aqui criamos o http para realizar as tareafs (enviar para o banco, add, deletar) do lado do front
 //apos aqui deve ir para membro.service e inserir o caimnho
@@ -36,11 +30,19 @@ namespace API.Controllers
 
     //[AllowAnonymous] permitir anonimato e os atributos autorizados são ignorados
     [HttpGet] //pega
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsuarios() //async operação assincrona
+        public async Task<ActionResult<PaginaLista<AppUser>>> GetUsuarios([FromQuery]UsuarioParametro usuarioParametro) //async operação assincrona fromquery da dica a API do que ela deve procurar
         {
-            //O assincronismo é útil para melhorar a experiência do usuário quando há alguma operação que demanda muito tempo para ser executada. Então um cliente pode continuar disponível quando ele pede algo para um serviço que demora. Ele não é usado para tornar algo mais rápido
-            var usuarios = await _usuarioRepository.GetMembersAsync(); // para usar de um jeito assincrono e não sincrono
+            var usuarioAtual = await _usuarioRepository.GetUserByUsernameAsync(User.GetNomeUsuario());// o usuario atual n]ão deve aparecer no Match
+            usuarioParametro.UsuarioAtual = usuarioAtual?.Nome;
 
+            if(string.IsNullOrEmpty(usuarioParametro.Genero)){
+                usuarioParametro.Genero = usuarioAtual.Genero == "Masculino" ? "Feminino" : "Masculino";
+            }
+            //O assincronismo é útil para melhorar a experiência do usuário quando há alguma operação que demanda muito tempo para ser executada. Então um cliente pode continuar disponível quando ele pede algo para um serviço que demora. Ele não é usado para tornar algo mais rápido
+            var usuarios = await _usuarioRepository.GetMembersAsync(usuarioParametro); // para usar de um jeito assincrono e não sincrono
+            Response.AddCabecalhoPaginacao(new CabecalhoPaginacao(usuarios.PaginaAtual, usuarios.TamanhoPagina, 
+            usuarios.ContagemTotal,usuarios.TotalPaginas));
+            
             return Ok(usuarios);
         }// ação de obter lista de usuarios sem especificar qual esta interessado
      

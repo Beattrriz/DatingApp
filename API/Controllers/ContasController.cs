@@ -47,7 +47,8 @@ namespace API.Controllers
             {
                 NomeUsuario = usuario.Nome,
                 Token = _tokenService.CreateToken(usuario),
-                ConhecidoComo =  usuario.ConhecidoComo   
+                ConhecidoComo =  usuario.ConhecidoComo,
+                Genero = usuario.Genero   
             };
         }
 
@@ -76,7 +77,8 @@ namespace API.Controllers
                 Token = _tokenService.CreateToken(usuario),
                 FotoUrl = usuario.Fotos.FirstOrDefault(x => x.Principal)?.Url, //a foto naõ aparece pq estava vazia, naõ tem foto para verificar
                 //vai alterar o httpost login
-                ConhecidoComo =  usuario.ConhecidoComo 
+                ConhecidoComo =  usuario.ConhecidoComo,
+                Genero = usuario.Genero
             };
         }
         //verifica se existe o usuario

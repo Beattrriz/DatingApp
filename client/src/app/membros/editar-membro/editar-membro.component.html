@@ -22,11 +22,11 @@
                </div>
                <div>
                   <strong>Última vez Ativo:</strong>
-                  <p>{{membro.ultimaVezAtivo}}</p>
+                  <p>{{membro.ultimaVezAtivo + 'Z' | timeago}}</p>
                </div>
                <div>
                   <strong>Membro desde:</strong>
-                  <p>{{membro.criado}}</p>
+                  <p>{{membro.criado | date: 'dd MM yyyy'}}</p>
                </div>
             </div>  
             <div class="card-footer">
