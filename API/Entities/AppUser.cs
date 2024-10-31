@@ -26,6 +26,9 @@ namespace API.Entities
         public string Pais { get; set; }
         public List<Foto> Fotos { get; set; } = new();
 
+        public List<UserLike> LikedByUsers {get; set;}
+         public List<UserLike> LikedUsers {get; set;}
+
         /*public int GetIdade()
         {
             return DataNascimento.CalcularIdade();

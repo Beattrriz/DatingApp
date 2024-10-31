@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dotnet\\AppDating\\API\\API.csproj": {}
+    "D:\\DotNet\\DatingApp\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\Dotnet\\AppDating\\API\\API.csproj": {
+    "D:\\DotNet\\DatingApp\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dotnet\\AppDating\\API\\API.csproj",
+        "projectUniqueName": "D:\\DotNet\\DatingApp\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Dotnet\\AppDating\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\bya_2\\.nuget\\packages\\",
-        "outputPath": "D:\\Dotnet\\AppDating\\API\\obj\\",
+        "projectPath": "D:\\DotNet\\DatingApp\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\byalt\\.nuget\\packages\\",
+        "outputPath": "D:\\DotNet\\DatingApp\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\bya_2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\byalt\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -39,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -103,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
